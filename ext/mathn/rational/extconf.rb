@@ -1,4 +1,6 @@
 # frozen_string_literal: false
 require "mkmf"
 
-create_makefile "mathn/rational"
+if have_func("nurat_canonicalization")
+  create_makefile "mathn/rational"
+end
