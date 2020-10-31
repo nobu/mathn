@@ -43,10 +43,14 @@ require "cmath.rb"
 # require "prime.rb"
 
 module Math::N
+  refine Numeric do
+    alias canonicalize itself
+  end
+
   refine Complex do
     def canonicalize
       if imag.zero?
-        real
+        real.canonicalize
       else
         self
       end
@@ -56,7 +60,7 @@ module Math::N
   refine Rational do
     def canonicalize
       if denominator == 1
-        numerator
+        numerator.canonicalize
       else
         self
       end
